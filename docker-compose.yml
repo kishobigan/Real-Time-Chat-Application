@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3001:3000"  # Map container's port 3000 to host's port 3000
+    volumes:
+      - ./frontend:/app  # Sync code for hot reloading
+    stdin_open: true
+
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "5000:5000" # Map container's port 5000 to host's port 5000
+    command: nodemon app.js
+    volumes:
+      - ./backend:/app  # Sync code for hot reloading
+    stdin_open: true
